@@ -27,8 +27,8 @@ C<objects> and displays the object's properties in a table.
 
 <& navbar, %ARGS &>
 
-<TABLE class="view">
-    <TR><TD class="field"><% $classmetadata->{colnames}->{$string} %></TD><TD> <% $item->{$string} %> </TD></TR>
+<table class="view">
+    <tr><td class="field"><% $classmetadata->{colnames}->{$string} %></td><td> <% $item->{$string} %> </td></tr>
 %foreach my $col (@{$classmetadata->{columns}}) {
 %    next if $col eq "id" or $col eq $string;
 %    next unless $item->$col;
@@ -42,21 +42,21 @@ from the C<column_names> method:
 
 </%doc>
 
-    <TR>
-    <TD class="field"> <% $classmetadata->{colnames}->{$col} %> </TD>
-    <TD> 
+    <tr>
+    <td class="field"> <% $classmetadata->{colnames}->{$col} %> </td>
+    <td> 
 
 %#=cut
 
 %    if ($col eq "url") {  # Possibly too much magic.
-               <A HREF="<%$item->get("url")%>">  <%$item->get("url")%></A>
+               <a href="<%$item->get("url")%>">  <%$item->get("url")%></a>
 %    } else {
 
 %#=for doc
 
 %#One interesting macro used in this template is C<maybe_link_view>:
 
-        <& macros:maybe_link_view, %ARGS, item=>$item->get($col) &>
+        <& macros/maybe_link_view, %ARGS, item=>$item->get($col) &>
 
 
 <%doc>
@@ -71,10 +71,10 @@ if there is no C<name> method or other stringification method defined.
 </%doc>
 
 %}
- </TD>
-</TR>
+ </td>
+</tr>
 %}
-</TABLE>
+</table>
 
 <%doc>
 =for doc
@@ -86,12 +86,12 @@ a list of has-many accessors. Next it calls each of those accessors, and
 displays the results in a table.
 
 </%doc>
-<& macros:view_related, %ARGS, object=>$item &>
+<& macros/view_related, %ARGS, object=>$item &>
 
 %#=cut
 
-    <& macros:button, %ARGS, item=>$item, action=> "edit" &>
-    <& macros:button, %ARGS, item=>$item, action=> "delete" &>
+    <& macros/button, %ARGS, item=>$item, action=> "edit" &>
+    <& macros/button, %ARGS, item=>$item, action=> "delete" &>
 %}
 
 <& footer, %ARGS &>

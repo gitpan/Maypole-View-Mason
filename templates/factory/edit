@@ -1,4 +1,5 @@
 <%args>
+$config
 $request
 $classmetadata
 $objects
@@ -18,21 +19,26 @@ form similar to L<add_new> but with the current values filled in.
 <& header, %ARGS &>
 
 %foreach my $item (@$objects) {
-<h2> Edit <% $item->name %></h2>
+%   my $string = $item->stringify_column;
+<h2> Edit <% $item->get($string) %></h2>
 
-<FORM ACTION="<% $base %>/<% $item->table %>/do_edit/<% $item->id %>" METHOD="post">
+
+<form action="<% $base %>/<% $item->table %>/<% 
+	$config->{request_reverse} ?
+	$item->id ."/do_edit" :
+	"do_edit/". $item->id %>" method="post">
 %foreach my $col (@{$classmetadata->{columns}}) {
 %   next if $col eq "id";
-        <P>
-        <B><% $classmetadata->{colnames}->{$col}%></B>
+        <p>
+        <b><% $classmetadata->{colnames}->{$col}%></b>
         : 
            <%$item->to_field($col)->as_HTML%>
-        </P>
+        </p>
 %        if ($errors->{$col}) {
-            <FONT COLOR="#ff0000"> <%$errors->{$col}%> </FONT>
+            <font color="#ff0000"> <%$errors->{$col}%> </font>
 %        }
 %}
-     <INPUT TYPE="submit" NAME="edit" VALUE="edit">
+     <input type="submit" name="edit" value="save">
 %}
 
 <& footer, %ARGS &>

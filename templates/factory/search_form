@@ -1,13 +1,13 @@
 
 <h3>Search</h3>
-<FORM METHOD="post" ACTION="<%$base%>/<%$classmetadata->{moniker}%>/search/">
-    <INPUT TYPE="hidden" NAME="action" VALUE="create">
-    <INPUT TYPE="hidden" NAME="class" VALUE="<%$classmetadata->{name}%>">
-    <TABLE class="view">
+<form method="post" action="<%$base%>/<%$classmetadata->{moniker}%>/search/">
+    <input type="hidden" name="action" value="create">
+    <input type="hidden" name="class" value="<%$classmetadata->{name}%>">
+    <table class="view">
 %foreach my $col (@{$classmetadata->{columns}}) {
 %next if $col eq "id";
-     <TR> <TD class="field"> <% $classmetadata->{colnames}->{$col} %> </TD>
-        <TD> 
+     <tr> <td class="field"> <% $classmetadata->{colnames}->{$col} %> </td>
+        <td> 
         <%perl> 
         my $element = $classmetadata->{cgi}->{$col};
         if ($element->{tag} eq "select") {
@@ -16,11 +16,11 @@
         }
         </%perl>
         <%$element->as_HTML%>
- </TD> </TR>
+ </td> </tr>
 %}
-    </TABLE>
-    <INPUT TYPE="submit" NAME="search" VALUE="search">
-</FORM>
+    </table>
+    <input type="submit" name="search" value="search">
+</form>
 <%once>
 use HTML::Element;
 </%once>

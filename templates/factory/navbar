@@ -10,12 +10,11 @@ accessible, with a link to the list page for each one.
 <div id="navcontainer">
 <ul id="navlist">
 %foreach my $table (@{$config->{display_tables}}) {
-        <LI <%($table eq $classmetadata->{table} ? 'id="active"' :'')%> > 
-        <& macros:link, table      => $table ,
+        <li <%($table eq $classmetadata->{table} ? 'id="active"' :'')%> > 
+        <& macros/link, table      => $table ,
                  base       => $base,
+		 config    => $config,
                  command    => "list", 
-                 additional => ($table eq $classmetadata->{table} ? 
-                               'id=current':''), 
                  label      => $table &>
         </LI>
 %}
@@ -23,6 +22,6 @@ accessible, with a link to the list page for each one.
 </div> 
 <%args>
 $config
-$classmetadata
+$classmetadata=>{}
 $base
 </%args>

@@ -4,7 +4,7 @@ use base 'Maypole::View::Base';
 use HTML::Mason;
 use Maypole::Constants;
 
-our $VERSION = '0.1';
+our $VERSION = '0.2';
 
 sub template {
     my ($self, $r) = @_;

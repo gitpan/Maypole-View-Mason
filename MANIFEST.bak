@@ -15,6 +15,7 @@ templates/factory/edit
 templates/factory/footer
 templates/factory/header
 templates/factory/list
+templates/factory/macros
 templates/factory/macros/button
 templates/factory/macros/display_line
 templates/factory/macros/link

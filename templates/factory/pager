@@ -9,7 +9,7 @@ to the L<Data::Page> interface.
 </%doc>
 %if ($pager && $pager->{first_page} != $pager->{last_page}) {
 
-<P ALIGN="center">Pages: 
+<p align="center">Pages: 
 <%perl>
      foreach my $num ($pager->{first_page} .. $pager->{last_page}) {
           if($num == $pager->{current_page}) {
@@ -18,7 +18,9 @@ to the L<Data::Page> interface.
             my $args = "?page=" . $num; # Order?
             my $label = "[$num]";
           $m->comp("link",base=>$base,
+	  		  config=>$config,
                           table=>$classmetadata->{table},
+			  request=>$request,
                           command=>"list", 
                           additional=>$args, 
                           label=>$label);
@@ -26,9 +28,11 @@ to the L<Data::Page> interface.
      }
 }
 </%perl>
-</P>
+</p>
 
 <%args>
+$request
+$config
 $base
 $pager
 $classmetadata
