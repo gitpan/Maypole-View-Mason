@@ -1,3 +1,7 @@
+<%args>
+$item
+$action
+</%args>
 <%doc>
 =head2 button
 
@@ -6,20 +10,5 @@ This is a generic button, which performs an action on an object.
 =cut
 
 </%doc>
-
-<td>
-<form method="post" action="<%$base%>/<%$item->table%>/<%
-  $config->{request_reverse} ?
-  "$action/".$item->id :
-  $item->id. "/$action" 
-%>">
-    <input type="submit" name="<%$action%>" value="<%$action%>">
-</form>
-</td>
-
-<%args>
-$config
-$base
-$item
-$action
-</%args>
+<a class="action" href="<%$base%>/<%$item->table%>/<%$action%>/<%$item->id%>">
+  <% $action %></a>

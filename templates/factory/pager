@@ -1,3 +1,6 @@
+<%args>
+$pager=>""
+</%args>
 <%doc>
 
 =head1 pager
@@ -29,11 +32,3 @@ to the L<Data::Page> interface.
 }
 </%perl>
 </p>
-
-<%args>
-$request
-$config
-$base
-$pager
-$classmetadata
-</%args>

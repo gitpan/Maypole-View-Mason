@@ -1,11 +1,6 @@
 <%args>
-$request
-@objects
-$base
-$config
-$classmetadata
-$search => undef
-$pager => undef
+$pager=>''
+$search=>''
 </%args>
 
 <& header, %ARGS &>
@@ -19,7 +14,7 @@ $pager => undef
 <& navbar, config        => $config,
            classmetadata => $classmetadata,
            base          => $base &>
-<div class="search"> <& search_form, %ARGS &> </div>
+<& search_form, %ARGS &>
 
 <div class="list">
 <table id="matrix" width="100%">
@@ -29,23 +24,25 @@ $pager => undef
     <th>
 <%perl>
     my $additional = "?order=" . $col;
-    $additional .= "&page=" . $pager->{current_page} if $pager;
-    $additional .= "&o2=desc";
-    if ($col eq $request->{query}->{order} && $request->{query}->{o2} ne "desc") {
+    $additional .= "&amp;page=" . $pager->{current_page} if $pager;
+    $additional .= "&amp;o2=desc"
+    if ($col eq $request->{query}->{order} && 
+        $request->{query}->{o2} ne "desc");
     </%perl>
      <& macros/link, table=> $classmetadata->{table},
               command=>"list", 
 	      config=>$config,
+	      base=>$base,
               additional=>$additional, 
               label=>$classmetadata->{colnames}->{$col}
       &>
-%   }
     </th>
-%}
-</tr>
+%   }
+    <th>Actions</th>
+    </tr>
 
 %my $count;
-%foreach my $item (@objects) {
+%foreach my $item (@$objects) {
 %$count++;
     <tr <%($count %2 ? 'class="alternate"':'')%> >
     <&macros/display_line, %ARGS, item=>$item &>

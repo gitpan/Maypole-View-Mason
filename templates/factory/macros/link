@@ -1,3 +1,9 @@
+<%args>
+$table
+$command
+$additional=>""
+$label
+</%args>
 <%doc>
 =head2 link
 
@@ -5,18 +11,7 @@ This creates an <A HREF="... to a command in the Apache::MVC system by
 catenating the base URL, table, command, and any arguments.
 
 =cut
+
 </%doc>
-
-<a href="<%$ARGS{base}%>/<%$table%>/<% ($config->{request_reverse} ?
-			"$command/$additional" :
-			"$additional/$command")
-			%>"><%$label%></a>
-
-<%args>
-$config
-$base
-$table
-$command
-$additional=>""
-$label
-</%args>
+<a href="<%$ARGS{base}%>/<%$table%>/<% $command . 
+    ($additional && "/". $additional )%>"><%$label%></a>

@@ -1,13 +1,13 @@
-
-<h3>Search</h3>
-<form method="post" action="<%$base%>/<%$classmetadata->{moniker}%>/search/">
+<%args>
+</%args>
+<form method="get" action="<%$base%>/<%$classmetadata->{moniker}%>/search/">
+<fieldset class="search">
+<legend>Search</legend>
     <input type="hidden" name="action" value="create">
     <input type="hidden" name="class" value="<%$classmetadata->{name}%>">
-    <table class="view">
 %foreach my $col (@{$classmetadata->{columns}}) {
-%next if $col eq "id";
-     <tr> <td class="field"> <% $classmetadata->{colnames}->{$col} %> </td>
-        <td> 
+%   next if $col eq "id";
+    <label><span class="field"> <% $classmetadata->{colnames}->{$col} %> </span>
         <%perl> 
         my $element = $classmetadata->{cgi}->{$col};
         if ($element->{tag} eq "select") {
@@ -16,16 +16,11 @@
         }
         </%perl>
         <%$element->as_HTML%>
- </td> </tr>
+	</label>
 %}
-    </table>
     <input type="submit" name="search" value="search">
+    </fieldset>
 </form>
 <%once>
 use HTML::Element;
 </%once>
-
-<%args>
-$base
-$classmetadata
-</%args>

@@ -1,3 +1,6 @@
+<%args>
+$object
+</%args>
 <%doc>
 =head2 view_related
 
@@ -19,9 +22,3 @@ brewery) calls the accesor, and displays a list of the results.
         </ul>
 %}
 
-<%args>
-$classmetadata
-$object
-$base
-$config
-</%args>

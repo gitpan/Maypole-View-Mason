@@ -1,11 +1,4 @@
 <%args>
-$request
-$objects
-$base
-$config
-$classmetadata
-$search => undef
-$pager => undef
 </%args>
 
 <%doc>
@@ -18,17 +11,14 @@ C<objects> and displays the object's properties in a table.
 =cut
 
 </%doc>
-
 <& header, %ARGS &>
-
 %foreach my $item (@$objects) {
 %   my $string = $item->stringify_column;
 <h2> <% $item->get($string) %></h2>
-
 <& navbar, %ARGS &>
-
 <table class="view">
-    <tr><td class="field"><% $classmetadata->{colnames}->{$string} %></td><td> <% $item->{$string} %> </td></tr>
+    <tr><td class="field"><% $classmetadata->{colnames}->{$string} %></td>
+    <td> <% $item->{$string} %> </td></tr>
 %foreach my $col (@{$classmetadata->{columns}}) {
 %    next if $col eq "id" or $col eq $string;
 %    next unless $item->$col;
@@ -48,15 +38,14 @@ from the C<column_names> method:
 
 %#=cut
 
-%    if ($col eq "url") {  # Possibly too much magic.
-               <a href="<%$item->get("url")%>">  <%$item->get("url")%></a>
-%    } else {
-
+%   if ($col eq "url" && $item->url) {  # Possibly too much magic.
+               <a href="<%$item->url%>"><%$item->url%></a>
+%   } else {
 %#=for doc
 
 %#One interesting macro used in this template is C<maybe_link_view>:
 
-        <& macros/maybe_link_view, %ARGS, item=>$item->get($col) &>
+        <& macros/maybe_link_view, %ARGS, item=>$item->$col &>
 
 
 <%doc>
@@ -93,7 +82,4 @@ displays the results in a table.
     <& macros/button, %ARGS, item=>$item, action=> "edit" &>
     <& macros/button, %ARGS, item=>$item, action=> "delete" &>
 %}
-
 <& footer, %ARGS &>
-
-

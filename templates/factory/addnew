@@ -1,6 +1,4 @@
 <%args>
-$base
-$classmetadata
 </%args>
 
 <%doc>
@@ -16,16 +14,16 @@ table.
 
 <& header, %ARGS &>
 </%doc>
-<h3>Add a new <%$classmetadata->{moniker}%></h3>
-<form method="post" action="<%$base%>/<%$classmetadata->{table}%>/do_edit/">
+<form id="createform" method="post" action="<%$base%>/<%$classmetadata->{table}%>/do_edit/">
+<fieldset>
+<legend>Add a new <%$classmetadata->{moniker}%></legend>
     <input type="hidden" name="action" value="create">
-    <table class="view">
 %foreach my $col ( @{$classmetadata->{columns}} ) {
 %next if $col eq "id";
-     <tr> <td class="field"> <% $classmetadata->{colnames}->{$col} %> </td>
-     <td> <% $classmetadata->{cgi}->{$col}->as_HTML %> </td></tr>
+    <label><span class="field"> <% $classmetadata->{colnames}->{$col} %></span>
+     <% $classmetadata->{cgi}->{$col}->as_HTML %> 
+     </label>
 %}
-    </table>
     <input type="submit" name="create" value="create">
+</fieldset>
 </form>
-<& footer, %ARGS &>

@@ -1,3 +1,6 @@
+<%args>
+$item
+</%args>
 <%doc>
 =head2 maybe_link_view
 
@@ -21,8 +24,3 @@ command for that object. Otherwise, it just displays the data.
         <%$item%>
 %}
 
-<%args>
-$item
-$base
-$config
-</%args>

@@ -1,13 +1,19 @@
-# http://module-build.sourceforge.net/META-spec.html
-#XXXXXXX This is a prototype!!!  It will change in the future!!! XXXXX#
-name:         Maypole-View-Mason
-version:      0.2
-version_from: Mason.pm
-installdirs:  site
+--- #YAML:1.0
+name: Maypole-View-Mason
+version: 0.3
+author:
+  - Simon Cozens
+Marcus Ramberg
+abstract: A HTML::Mason view class for Maypole
+license: perl
 requires:
-    HTML::Mason:                   1.2
-    Maypole:                       1.1
-    Test::More:                    0
-
-distribution_type: module
-generated_by: ExtUtils::MakeMaker version 6.17
+  HTML::Mason: 1.2
+  Maypole: 2.06
+provides:
+  HTML::Mason::Commands:
+    file: lib/Maypole/View/Mason.pm
+    version: 0.3
+  Maypole::View::Mason:
+    file: lib/Maypole/View/Mason.pm
+    version: 0.3
+generated_by: Module::Build version 0.25

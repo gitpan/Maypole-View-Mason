@@ -1,3 +1,6 @@
+<%args>
+$item
+</%args>
 <%doc>
 =head2 display_line
 
@@ -14,8 +17,8 @@ for some.
 %foreach my $col (@{$classmetadata->{columns}}) {
 %  next if $col eq "id";
         <td>
-%       if ($col eq "url") {
-            <a href=<% $item->{url}%> ><%$item->{url}%></a>
+%       if ($col eq "url" && $item->{url}) {
+            <a href="<% $item->{url}%>"><%$item->{url}%></a>
 %       }elsif ($col eq $item->stringify_column) {
             <& maybe_link_view, %ARGS, item=>$item&>
 %       } else {
@@ -23,12 +26,8 @@ for some.
 %       }
         </td>
 %}
+<td>
     <& button, %ARGS, item=>$item, action => "edit",base=>$base &>
     <& button, %ARGS, item=>$item, action =>"delete",base=>$base &>
+</td>
 
-<%args>
-$item
-$config
-$base
-$classmetadata
-</%args>

@@ -1,3 +1,5 @@
+<%args>
+</%args>
 <%doc>
 
 =head1 navbar
@@ -10,18 +12,13 @@ accessible, with a link to the list page for each one.
 <div id="navcontainer">
 <ul id="navlist">
 %foreach my $table (@{$config->{display_tables}}) {
-        <li <%($table eq $classmetadata->{table} ? 'id="active"' :'')%> > 
-        <& macros/link, table      => $table ,
-                 base       => $base,
+        <li<%($table eq $classmetadata->{table} ? ' id="active"' :'')%>> 
+	    <& macros/link, table      => $table ,
+		base       => $base,
 		 config    => $config,
                  command    => "list", 
                  label      => $table &>
-        </LI>
+        </li>
 %}
 </ul>
 </div> 
-<%args>
-$config
-$classmetadata=>{}
-$base
-</%args>

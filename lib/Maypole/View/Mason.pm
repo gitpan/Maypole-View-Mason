@@ -3,21 +3,43 @@ use strict;
 use base 'Maypole::View::Base';
 use HTML::Mason;
 use Maypole::Constants;
+use Data::Dumper;
 
-our $VERSION = '0.2';
+our $VERSION = '0.3';
+
+{
+    package HTML::Mason::Commands;
+    use vars qw/$request $config $classmetadata $objects $base/;
+}
 
 sub template {
     my ($self, $r) = @_;
+    my $class = ref $r;
     my $label = "path0";
     my $output;
+    my %args=$self->vars($r);
     my $mason = HTML::Mason::Interp->new(
         comp_root => [ map { [ $label++ => $_ ] } grep {$_} $self->paths($r) ],
         out_method => \$output,
-        error_mode => "output" 
-    );  # Saves us having to handle them...
-    $mason->exec("/".$r->template, $self->vars($r));
-    $r->{output} = $output;
-    return OK;
+        error_mode => "fatal"
+    );  
+    no strict 'refs';
+    map {${"HTML::Mason::Commands::".$_} =$args{$_} } keys %args;
+    my ($comp) = "/".$r->template;
+    if (! $mason->comp_exists($comp) ) {
+	$r->{error} = "Could not find $comp";
+	return ERROR;
+    }
+    eval {
+	$mason->exec( $comp , %{$r->params});
+    };
+    if ($@) {
+	$r->{error} = $@;
+	return ERROR;
+    } else {
+	$r->{output} = $output;
+	return OK;
+    }
 }
 
 1;
@@ -53,6 +75,15 @@ are, of course, Template Toolkit ones.
 Please see the Maypole manual, and in particular, the C<View> chapter,
 for the template variables available and for a refresher on how template
 components are resolved.
+
+
+=head2 template
+
+This is the main method of this module. See L<Maypole::View::Base>.
+
+=head1 SEE ALSO
+
+L<Maypole>,L<HTML::Mason>
 
 =head1 AUTHOR
 

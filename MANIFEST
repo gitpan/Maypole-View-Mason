@@ -1,18 +1,20 @@
-Changes
-Makefile
+Build.PL
 Makefile.PL
-MANIFEST
-MANIFEST.bak
-MANIFEST.SKIP
-Mason.pm
-META.yml			Module meta-data (added by MakeMaker)
+Changes
+lib/Maypole/View/Mason.pm
+MANIFEST			This list of files
+META.yml
 README
+t/01basics.t
+t/02pod.t
+t/03podcoverage.t
 templates/beer/addnew
 templates/custom/frontpage
 templates/custom/header
 templates/factory/addnew
 templates/factory/edit
 templates/factory/footer
+templates/factory/frontpage
 templates/factory/header
 templates/factory/list
 templates/factory/macros/button
@@ -25,4 +27,4 @@ templates/factory/navbar
 templates/factory/pager
 templates/factory/search_form
 templates/factory/view
-test.pl
+templates/maypole.css
