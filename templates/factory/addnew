@@ -1,0 +1,31 @@
+<%args>
+$base
+$classmetadata
+</%args>
+
+<%doc>
+
+=head1 addnew
+
+This is the interface to adding a new instance of an object. (or a new
+row in the database, if you want to look at it that way) It displays a
+form containing a list of HTML components for each of the columns in the
+table.
+
+=cut
+
+<& header, %ARGS &>
+</%doc>
+<h3>Add a new <%$classmetadata->{moniker}%></h3>
+<FORM METHOD="post" ACTION="<%$base%>/<%$classmetadata->{table}%>/do_edit/">
+    <INPUT TYPE="hidden" NAME="action" VALUE="create">
+    <TABLE class="view">
+%foreach my $col ( @{$classmetadata->{columns}} ) {
+%next if $col eq "id";
+     <TR> <TD class="field"> <% $classmetadata->{colnames}->{$col} %> </TD>
+     <TD> <% $classmetadata->{cgi}->{$col}->as_HTML %> </TD> </TR>
+%}
+    </TABLE>
+    <INPUT TYPE="submit" NAME="create" VALUE="create">
+</FORM>
+<& footer, %ARGS &>

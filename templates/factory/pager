@@ -1,0 +1,35 @@
+<%doc>
+
+=head1 pager
+
+This controls the pager display at the bottom (by default) of the list
+and search views. It expects a C<pager> template argument which responds
+to the L<Data::Page> interface.
+
+</%doc>
+%if ($pager && $pager->{first_page} != $pager->{last_page}) {
+
+<P ALIGN="center">Pages: 
+<%perl>
+     foreach my $num ($pager->{first_page} .. $pager->{last_page}) {
+          if($num == $pager->{current_page}) {
+            print "[$num]"
+          } else {
+            my $args = "?page=" . $num; # Order?
+            my $label = "[$num]";
+          $m->comp("link",base=>$base,
+                          table=>$classmetadata->{table},
+                          command=>"list", 
+                          additional=>$args, 
+                          label=>$label);
+          }
+     }
+}
+</%perl>
+</P>
+
+<%args>
+$base
+$pager
+$classmetadata
+</%args>

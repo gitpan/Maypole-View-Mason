@@ -1,0 +1,20 @@
+Makefile.PL
+Changes
+MANIFEST
+Mason.pm
+META.yml			Module meta-data (added by MakeMaker)
+README
+templates/beer/addnew
+templates/custom/frontpage
+templates/custom/header
+templates/factory/addnew
+templates/factory/edit
+templates/factory/footer
+templates/factory/header
+templates/factory/list
+templates/factory/macros
+templates/factory/navbar
+templates/factory/pager
+templates/factory/search_form
+templates/factory/view
+test.pl
